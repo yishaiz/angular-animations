@@ -4,6 +4,5 @@ export class TodoItem {
     public completed : boolean = false,
     public editing : boolean = false,
     public isHidden : boolean = false) {
-
   }
 }

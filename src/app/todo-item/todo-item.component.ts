@@ -8,11 +8,10 @@ import { trigger, style, transition, animate, group, state } from '@angular/anim
 
   template : `
 
-
+    <!--<li [ngClass]="getItemClass(item)">-->
     <li [ngClass]="getItemClass(item)"
-    >
-      <!--/[@isVisibleChanged]="!item.isHidden"-->
-      
+        [@isVisibleChanged]="!item.isHidden">
+
       <div class="view">
         <input class="toggle"
                type="checkbox"
@@ -33,29 +32,31 @@ import { trigger, style, transition, animate, group, state } from '@angular/anim
              (keyup.enter)="saveChange(item, editValue)"
              (keyup.escape)="undoChange(item)"
              (blur)="undoChange(item)">
-
     </li>
 
-  `/*,
-  animations : [
+  `,
+animations : [
 
-    trigger('isVisibleChanged', [
+  trigger('isVisibleChanged', [
 
-      state('true', style({ opacity : 1, transform : 'scale(1.0)' })),
+    state('true', style({ opacity : 1, transform : 'scale(1.0)' })),
 
-      state('false', style({ opacity : 0, transform : 'scale(0.0)' })),
+    state('false', style({ opacity : 0, transform : 'scale(0.0)' })),
 
-      /!*    state('true', style({  'background-color' : 'yellow', opacity : 1, transform : 'scale(1.0)' })),
+    transition('1 => 0', animate('300ms')),
 
-         state('false', style({ 'background-color' : 'green', opacity : 0, transform : 'scale(0.0)' })),
+    transition('0 => 1', animate('900ms'))
 
-      *!/
-      transition('1 => 0', animate('300ms')),
-
-      transition('0 => 1', animate('900ms'))
-
-    ]) ]*/
+  ])
+]
 })
+
+
+/*    state('true', style({  'background-color' : 'yellow', opacity : 1, transform : 'scale(1.0)' })),
+
+   state('false', style({ 'background-color' : 'green', opacity : 0, transform : 'scale(0.0)' })),
+
+*/
 
 export class TodoItemComponent {
 

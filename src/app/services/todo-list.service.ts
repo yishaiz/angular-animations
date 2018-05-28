@@ -1,44 +1,44 @@
-import  {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {TodoItem} from "../models/todo-item.model";
+import { TodoItem } from "../models/todo-item.model";
 
 @Injectable()
 export class TodoListService {
 
-  todoList: Array<TodoItem> = [
-    {title: 'RSVP Yes', completed: true, editing: false,  isHidden : false},
-    {title: 'Set up environment', completed: true, editing: false,  isHidden : false},
-    {title: 'Clone project', completed: false, editing: false,  isHidden : false},
-    {title: 'Come to meetup', completed: false, editing: false,  isHidden : false},
+  todoList : Array<TodoItem> = [
+    { title : 'RSVP Yes', completed : true, editing : false, isHidden : false },
+    { title : 'Set up environment', completed : true, editing : false, isHidden : false },
+    { title : 'Clone project', completed : false, editing : false, isHidden : false },
+    { title : 'Come to meetup', completed : false, editing : false, isHidden : false },
   ];
 
-  getTodos(): Promise<TodoItem[]> {
+  getTodos () : Promise<TodoItem[]> {
     return Promise.resolve(
       this.todoList
     );
   }
 
-  getTotalCount(){
-   return this.todoList.length;
+  getTotalCount () {
+    return this.todoList.length;
   }
 
-  destroyItem(item: TodoItem): void {
+  destroyItem (item : TodoItem) : void {
     const index = this.todoList.indexOf(item);
 
     this.todoList.splice(index, 1);
   }
 
-  getNotCompletedItemsCount(): number {
+  getNotCompletedItemsCount () : number {
 
-/*
-    let notCompletedItems = this.todoList.filter((item: any) => {
-      return item.completed == false;
-    })
+    /*
+        let notCompletedItems = this.todoList.filter((item: any) => {
+          return item.completed == false;
+        })
 
-    console.log(notCompletedItems);
-*/
+        console.log(notCompletedItems);
+    */
 
-    let remainItemsCount = this.todoList.filter((item: TodoItem) => {
+    let remainItemsCount = this.todoList.filter((item : TodoItem) => {
       return item.completed == false;
     }).length;
 
@@ -46,17 +46,17 @@ export class TodoListService {
   }
 
 
-  clearCompleted(): void {
-    let completed = this.todoList.filter((item: TodoItem) => {
+  clearCompleted () : void {
+    let completed = this.todoList.filter((item : TodoItem) => {
       return item.completed == true;
     });
 
-    completed.forEach((item: TodoItem)=> {
+    completed.forEach((item : TodoItem) => {
       this.destroyItem(item);
     });
   }
 
-  addItem(title: string): void {
+  addItem (title : string) : void {
     this.todoList.push(new TodoItem(title));
   }
 

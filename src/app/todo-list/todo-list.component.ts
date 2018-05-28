@@ -67,13 +67,6 @@ export class TodoListComponent implements OnInit, OnChanges {
 
   todoList : Array<TodoItem> = [];
 
-  /*todoList = [
-   {title: 'RSVP Yes', completed: true, editing: false},
-   {title: 'Set up environment', completed: true, editing: false},
-   {title: 'Clone project', completed: false, editing: false},
-   {title: 'Come to meetup', completed: false, editing: false},
-   ];
-   */
 
   ngOnInit () : void {
     this.getTodos();
@@ -109,7 +102,7 @@ export class TodoListComponent implements OnInit, OnChanges {
   destroyItem (item : TodoItem) : void {
     console.log('remove item');
 
-    // item.isHidden=true;
+    item.isHidden=true;
 
     // return;
 
