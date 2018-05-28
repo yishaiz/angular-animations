@@ -85,7 +85,7 @@ export class TodoListComponent implements OnInit, OnChanges {
     );
   }
 
-  /*animStart(event) {
+  animStart(event) {
     console.log('Animation Started');
     // debugger;
     // event...addCllass
@@ -98,18 +98,19 @@ export class TodoListComponent implements OnInit, OnChanges {
     console.log('Animation Ended');
     // do more stuff
   }
-*/
+
   destroyItem (item : TodoItem) : void {
     console.log('remove item');
 
-    item.isHidden=true;
+    // item.isHidden=true;
+    item.isHidden=!item.isHidden ;
 
-    // return;
+    return;
 
     //can be also as promise
-    this.todoService.destroyItem(item);
-
-    this.getTodos();
+    // this.todoService.destroyItem(item);
+    //
+    // this.getTodos();
 
     //this.getNotCompletedItemsCount();
   }
