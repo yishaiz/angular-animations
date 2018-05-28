@@ -1,10 +1,10 @@
 import { Component, Input, Output, OnInit, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
 import { TodoListService }                                                         from '../services/todo-list.service';
 import { TodoItem }                                                                from '../models/todo-item.model';
+
 // import { trigger, style, transition, animate, group }                              from '@angular/core';
 
-
-// import { trigger, style, transition, animate, group }                              from '@angular/animations';
+import { trigger, style, transition, animate, group } from '@angular/animations';
 
 @Component({
   selector : 'app-todo-list',
@@ -13,50 +13,44 @@ import { TodoItem }                                                             
   template : `
     <ul class="todo-list">
 
-      <!--
-      <li *ngFor="let item of todoList">
-        {{item.title}}
-      </li>-->
-
       <app-todo-item *ngFor="let item of todoList"
                      [item]="item"
                      class="item-animation"
                      (destroy)="destroyItem($event)"
                      (notifyCompletedChange)="getNotCompletedItemsCount()"
- ></app-todo-item>
-<!--
- [@itemAnim]
+                     [@itemAnim]
                      (@itemAnim.start)="animStart($event)"
                      (@itemAnim.done)="animEnd($event)"></app-todo-item>
--->
 
-      <!--[myName] ="item.title"-->
+      <!--&gt;</app-todo-item>-->
 
     </ul>
   `
 
-  /*,
+  ,
   animations : [
     trigger('itemAnim', [
       transition(':enter', [
-        style({opacity:0.3, color:'red',  transform : 'translateX(-100%)' }),
+
+        style({ transform : 'translateX(-100%)' }),
+        // opacity:0.3, color:'red',
 
         animate(1350)
       ]),
       transition(':leave', [
         group([
-          animate('0.7s ease', style({
-          // animate('0.2s ease', style({
+          animate('0.2s ease', style({
+            // animate('0.2s ease', style({
             transform : 'translate(150px,25px)'
           })),
-          // animate('0.5s 0.2s ease', style({
-          animate('1.1s 0.5s ease', style({
-            opacity : 0.4
+          animate('0.5s 0.2s ease', style({
+            // animate('1.1s 0.5s ease', style({
+            opacity : 0
           }))
         ])
       ])
     ])
-  ]*/
+  ]
 })
 
 export class TodoListComponent implements OnInit, OnChanges {

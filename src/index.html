@@ -14,3 +14,15 @@
 </html>
 
 
+
+
+
+
+<app-todo-item *ngFor="let item of todoList"
+               [item]="item"
+               class="item-animation"
+               (destroy)="destroyItem($event)"
+               (notifyCompletedChange)="getNotCompletedItemsCount()"
+               
+               (@itemAnim.start)="animStart($event)"
+               (@itemAnim.done)="animEnd($event)"></app-todo-item>
