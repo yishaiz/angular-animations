@@ -13,22 +13,22 @@ import { trigger, style, transition, animate, group, state } from '@angular/anim
   template : `
     <ul class="todo-list">
 
-        <app-todo-item *ngFor="let item of todoList"
-                       [item]="item" 
-                       
-                       [@isVisibleChanged1]="!item.isHidden"
-        
-                       style="display: block"
-        
-                       class="item-animation"
-                       (destroy)="destroyItem($event)"
-                       (notifyCompletedChange)="getNotCompletedItemsCount()"
-        
-                       [@itemAnim]
-                       (@itemAnim.start)="animStart($event)"
-                       (@itemAnim.done)="animEnd($event)"
-        
-        ></app-todo-item>
+      <app-todo-item *ngFor="let item of todoList"
+                     [item]="item"
+
+                     [@isVisibleChanged]="!item.isHidden"
+
+                     style="display: block"
+
+                     class="item-animation"
+                     (destroy)="destroyItem($event)"
+                     (notifyCompletedChange)="getNotCompletedItemsCount()"
+
+                     [@itemAnim]
+                     (@itemAnim.start)="animStart($event)"
+                     (@itemAnim.done)="animEnd($event)"
+
+      ></app-todo-item>
 
       <!--&gt;</app-todo-item>-->
 
@@ -37,19 +37,15 @@ import { trigger, style, transition, animate, group, state } from '@angular/anim
 
   ,
   animations : [
-    trigger('isVisibleChanged1', [
-
-      /*     state('true', style({ opacity : 1, transform : 'scale(1.0)' })),
-
-           state('false', style({ opacity : 0, transform : 'scale(0.0)' })),
-     */
-
-      state('true', style({ 'color' : 'red', opacity : 1, transform : 'scale(1.0)' })),
-
-      state('false', style({ 'color' : 'brown', opacity : 0, transform : 'scale(0)' })),
+    trigger('isVisibleChanged', [
 
 
-      transition('1 => 0', animate('3300ms')),
+      state('true', style({ color : 'red', opacity : 1, transform : 'scale(1.0)' })),
+
+      state('false', style({ color : 'green', opacity : 0, transform : 'scale(0)' })),
+
+
+      transition('1 => 0', animate('1300ms')),
 
       transition('0 => 1', animate('3900ms'))
 
@@ -58,19 +54,32 @@ import { trigger, style, transition, animate, group, state } from '@angular/anim
     trigger('itemAnim', [
       transition(':enter', [
 
+        // style({ color : 'yellow' ,transform : 'translateX(-100%)' }),
         style({ transform : 'translateX(-100%)' }),
-        // opacity:0.3, color:'red',
+        animate(1350),
+      ])
 
-        animate(1350)
-      ]),
+
+      /*transition(':enter', [
+
+        style({ transform : 'translateX(-100%)' }),
+        animate(1350),
+        style({ color : 'yellow' }),
+        animate(1050)
+      ])*/
+
+      ,
       transition(':leave', [
         group([
           animate('0.2s ease', style({
             // animate('0.2s ease', style({
+            color : 'blue',
             transform : 'translate(150px,25px)'
           })),
           animate('0.5s 0.2s ease', style({
             // animate('1.1s 0.5s ease', style({
+
+
             opacity : 0
           }))
         ])
