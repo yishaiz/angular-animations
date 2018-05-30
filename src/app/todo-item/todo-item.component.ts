@@ -9,8 +9,11 @@ import { trigger, style, transition, animate, group, state } from '@angular/anim
   template : `
 
     <!--<li [ngClass]="getItemClass(item)">-->
+
+    <!--[@isVisibleChanged]="!item.isHidden"-->
+    
     <li [ngClass]="getItemClass(item)"
-        [@isVisibleChanged]="!item.isHidden">
+        >
 
       <div class="view">
         <input class="toggle"
@@ -34,15 +37,11 @@ import { trigger, style, transition, animate, group, state } from '@angular/anim
              (blur)="undoChange(item)">
     </li>
 
-  `,
+  `
+ /* ,
   animations : [
 
     trigger('isVisibleChanged', [
-
- /*     state('true', style({ opacity : 1, transform : 'scale(1.0)' })),
-
-      state('false', style({ opacity : 0, transform : 'scale(0.0)' })),
-*/
 
       state('true', style({'color':'green', opacity : 1, transform : 'scale(1.0)' })),
 
@@ -55,7 +54,7 @@ import { trigger, style, transition, animate, group, state } from '@angular/anim
       transition('0 => 1', animate('2900ms'))
 
     ])
-  ]
+  ]*/
 })
 
 
