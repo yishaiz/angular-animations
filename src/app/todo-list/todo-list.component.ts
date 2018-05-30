@@ -4,7 +4,7 @@ import { TodoItem }                                                             
 
 // import { trigger, style, transition, animate, group }                              from '@angular/core';
 
-import { trigger, style, transition, animate, group } from '@angular/animations';
+import { trigger, style, transition, animate, group, state } from '@angular/animations';
 
 @Component({
   selector : 'app-todo-list',
@@ -13,14 +13,22 @@ import { trigger, style, transition, animate, group } from '@angular/animations'
   template : `
     <ul class="todo-list">
 
-      <app-todo-item *ngFor="let item of todoList"
-                     [item]="item"
-                     class="item-animation"
-                     (destroy)="destroyItem($event)"
-                     (notifyCompletedChange)="getNotCompletedItemsCount()"
-                     [@itemAnim]
-                     (@itemAnim.start)="animStart($event)"
-                     (@itemAnim.done)="animEnd($event)"></app-todo-item>
+        <app-todo-item *ngFor="let item of todoList"
+                       [item]="item" 
+                       
+                       [@isVisibleChanged1]="!item.isHidden"
+        
+                       style="display: block"
+        
+                       class="item-animation"
+                       (destroy)="destroyItem($event)"
+                       (notifyCompletedChange)="getNotCompletedItemsCount()"
+        
+                       [@itemAnim]
+                       (@itemAnim.start)="animStart($event)"
+                       (@itemAnim.done)="animEnd($event)"
+        
+        ></app-todo-item>
 
       <!--&gt;</app-todo-item>-->
 
@@ -29,6 +37,24 @@ import { trigger, style, transition, animate, group } from '@angular/animations'
 
   ,
   animations : [
+    trigger('isVisibleChanged1', [
+
+      /*     state('true', style({ opacity : 1, transform : 'scale(1.0)' })),
+
+           state('false', style({ opacity : 0, transform : 'scale(0.0)' })),
+     */
+
+      state('true', style({ 'color' : 'red', opacity : 1, transform : 'scale(1.0)' })),
+
+      state('false', style({ 'color' : 'brown', opacity : 0, transform : 'scale(0)' })),
+
+
+      transition('1 => 0', animate('3300ms')),
+
+      transition('0 => 1', animate('3900ms'))
+
+    ])
+    ,
     trigger('itemAnim', [
       transition(':enter', [
 
@@ -85,7 +111,7 @@ export class TodoListComponent implements OnInit, OnChanges {
     );
   }
 
-  animStart(event) {
+  animStart (event) {
     console.log('Animation Started');
     // debugger;
     // event...addCllass
@@ -94,7 +120,7 @@ export class TodoListComponent implements OnInit, OnChanges {
     // do more stuff
   }
 
-  animEnd(event) {
+  animEnd (event) {
     console.log('Animation Ended');
     // do more stuff
   }
@@ -103,7 +129,7 @@ export class TodoListComponent implements OnInit, OnChanges {
     console.log('remove item');
 
     // item.isHidden=true;
-    item.isHidden=!item.isHidden ;
+    item.isHidden = !item.isHidden;
 
     return;
 
